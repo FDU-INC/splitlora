@@ -1,0 +1,622 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="https://kit.fontawesome.com/2713e85d23.js" crossorigin="anonymous"></script>
+
+    <!--
+  <script src="./resources/jsapi" type="text/javascript"></script>
+  <script type="text/javascript" async>google.load("jquery", "1.3.2");</script>
+ -->
+
+    <!-- @font-face {
+font-family: 'Avenir Book';
+src: url("./fonts/Avenir_Book.ttf");
+/* File to be stored at your site */
+} -->
+
+    <style type="text/css">
+        body {
+            font-family: "Avenir Book", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+            font-weight: 300;
+            font-size: 14px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 800px;
+        }
+
+        h1 {
+            font-weight: 300;
+        }
+
+        h2 {
+            font-weight: 300;
+        }
+
+        p {
+            font-weight: 300;
+            line-height: 1.4;
+        }
+
+        code {
+            font-size: 0.8rem;
+            margin: 0 0.2rem;
+            padding: 0.5rem 0.8rem;
+            white-space: nowrap;
+            background: #efefef;
+            border: 1px solid #d3d3d3;
+            color: #000000;
+            border-radius: 3px;
+        }
+
+        pre>code {
+            display: block;
+            white-space: pre;
+            line-height: 1.5;
+            padding: 0;
+            margin: 0;
+        }
+
+        pre.prettyprint>code {
+            border: none;
+        }
+
+
+
+        .disclaimerbox {
+            background-color: #eee;
+            border: 1px solid #eeeeee;
+            border-radius: 10px;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            padding: 20px;
+        }
+
+        video.header-vid {
+            height: 140px;
+            border: 1px solid black;
+            border-radius: 10px;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+        }
+
+        img.header-img {
+            height: 140px;
+            border: 1px solid black;
+            border-radius: 10px;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+        }
+
+        img.rounded {
+            border: 0px solid #eeeeee;
+            border-radius: 10px;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+
+        }
+
+        a:link,
+        a:visited {
+            color: #1367a7;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #208799;
+        }
+
+        td.dl-link {
+            height: 160px;
+            text-align: center;
+            font-size: 22px;
+        }
+
+        .layered-paper-big {
+            /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+            box-shadow:
+                0px 0px 1px 1px rgba(0, 0, 0, 0.35),
+                /* The top layer shadow */
+                5px 5px 0 0px #fff,
+                /* The second layer */
+                5px 5px 1px 1px rgba(0, 0, 0, 0.35),
+                /* The second layer shadow */
+                10px 10px 0 0px #fff,
+                /* The third layer */
+                10px 10px 1px 1px rgba(0, 0, 0, 0.35),
+                /* The third layer shadow */
+                15px 15px 0 0px #fff,
+                /* The fourth layer */
+                15px 15px 1px 1px rgba(0, 0, 0, 0.35),
+                /* The fourth layer shadow */
+                20px 20px 0 0px #fff,
+                /* The fifth layer */
+                20px 20px 1px 1px rgba(0, 0, 0, 0.35),
+                /* The fifth layer shadow */
+                25px 25px 0 0px #fff,
+                /* The fifth layer */
+                25px 25px 1px 1px rgba(0, 0, 0, 0.35);
+            /* The fifth layer shadow */
+            margin-left: 10px;
+            margin-right: 45px;
+        }
+
+
+        .layered-paper {
+            /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+            box-shadow:
+                0px 0px 1px 1px rgba(0, 0, 0, 0.35),
+                /* The top layer shadow */
+                5px 5px 0 0px #fff,
+                /* The second layer */
+                5px 5px 1px 1px rgba(0, 0, 0, 0.35),
+                /* The second layer shadow */
+                10px 10px 0 0px #fff,
+                /* The third layer */
+                10px 10px 1px 1px rgba(0, 0, 0, 0.35);
+            /* The third layer shadow */
+            margin-top: 5px;
+            margin-left: 10px;
+            margin-right: 30px;
+            margin-bottom: 5px;
+        }
+
+        .vert-cent {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+        }
+    </style>
+
+
+
+    <title>SplitLoRA</title>
+</head>
+
+<body>
+    <br>
+    <center>
+        <span style="font-size:26px">SplitLoRA: A Split Parameter-Efficient Fine-Tuning<br>
+            Framework for Large Language Models</span><br><br><br>
+    </center>
+    <table align="center" width="800px">
+        <tbody>
+            <tr>
+                <td align="center" width="160px">
+                    <center>
+                        <span style="font-size:16px"><a href="http://zhenglin0425.github.io">Zheng
+                                Lin</a><sup>1 2</sup></span>
+                    </center>
+                </td>
+                <td align="center" width="160px">
+                    <center>
+                        <span style="font-size:16px">Xuanjie
+                                Hu</a><sup>1</sup></span>
+                    </center>
+                </td>
+                <td align="center" width="160px">
+                    <center>
+                        <span style="font-size:16px">Yuxin
+                                Zhang</a><sup>1</sup></span>
+                    </center>
+                </td>
+                <td align="center" width="160px">
+                    <center>
+                        <span style="font-size:16px"><a href="https://rabbitnick.github.io/">Zhe
+                                Chen</a><sup>1</sup></span>
+                    </center>
+                </td>
+                <td align="center" width="160px">
+                    <center>
+                        <span style="font-size:16px">Zihan
+                                Fang</a><sup>1</sup></span>
+                    </center>
+                </td>
+                <td align="center" width="160px">
+                    <center>
+                        <span style="font-size:16px"><a href="https://xianhaochen.net/">Xianhao
+                                Chen</a><sup>2</sup></span>
+                    </center>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" width="160px">
+                    <center>
+                        <span style="font-size:16px"><a href="https://inc.fudan.edu.cn/incenglish/WenjunZhu/list.htm">Wenjun
+                                Zhu</a><sup>1</sup></span>
+                    </center>
+                </td>
+                <td align="center" width="160px">
+                    <center>
+                        <span style="font-size:16px"><a href="https://www.ang-li.com/">Ang
+                                Li</a><sup>3</sup></span>
+                    </center>
+                </td>
+                <td align="center" width="250px">
+                    <center>
+                        <span style="font-size:16px"><a href="https://praneeth.mit.edu/">Praneeth
+                            Vepakomma</a><sup>4 5</sup></span>
+                    </center>
+                </td>
+                <td align="center" width="160px">
+                    <center>
+                        <span style="font-size:16px"><a href="https://inc.fudan.edu.cn/incenglish/wuewwao/list.htm">Yue
+                                Gao</a><sup>1</sup></span>
+                    </center>
+                </td>
+            </tr>
+
+        </tbody>
+    </table><br>
+
+    <table align="center" width="700px">
+        <tbody>
+            <tr>
+                <td align="center" width="50px">
+                    <center>
+                        <span style="font-size:16px"></span>
+                    </center>
+                </td>
+                <!-- <td align="center" width="250px"> -->
+                    <center>
+                        <span style="font-size:16px"><sup>1</sup>School of Computer Science, Fudan University, Shanghai, China</span>
+                    </center>
+                <!-- </td> -->
+                <!-- <td align="center" width="250px"> -->
+                    <center>
+                        <span style="font-size:16px"><sup>2</sup>Department of Electrical and Electronic Engineering, University of Hong Kong, Pok Fu Lam, Hong Kong, China</span>
+                    </center>
+                <!-- </td> -->
+                <!-- <td align="center" width="250px"> -->
+                    <center>
+                        <span style="font-size:16px"><sup>3</sup>Department of Electrical and Computer Engineering, University of Maryland, College Park, USA</span>
+                    </center>
+                <!-- </td> -->
+                <!-- <td align="center" width="250px"> -->
+                    <center>
+                        <span style="font-size:16px"><sup>4</sup>Massachusetts Institute of Technology, Cambridge, USA</span>
+                    </center>
+                <!-- </td> -->
+                <!-- <td align="center" width="250px"> -->
+                    <center>
+                        <span style="font-size:16px"><sup>5</sup>Mohamed bin Zayed University of Artificial Intelligence, Abu Dhabi, United Arab Emirates</span>
+                    </center>
+                <!-- </td> -->
+                <td align="center" width="50px">
+                    <center>
+                        <span style="font-size:16px"></span>
+                    </center>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table align="center" width="700px">
+        <tbody>
+            <tr>
+                <td align="center" width="200px">
+                    <center>
+                        <br>
+                        <span style="font-size:20px">
+                            GitHub
+                            <!-- <a href=https://github.com/minyoungg/LTE>GitHub</a> -->
+                        </span>
+                    </center>
+                </td>
+
+                <td align="center" width="200px">
+                    <center>
+                        <br>
+                        <span style="font-size:20px">
+                            arXiv
+                            <!-- <a href="https://arxiv.org/abs/2402.16828">arXiv</a> -->
+                            <br />
+                        </span>
+                    </center>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <hr>
+    <!-- <p>
+        <center>
+            <img class="rounded" src="./assets/teaser.png" width="500px">
+        </center>
+    </p> -->
+    <center>
+        <h2>
+            Abstract
+        </h2>
+    </center>
+    <p>
+        <left>
+            The scalability of large language models (LLMs) has led to significant achievements in key domains.
+            Despite the urgent need for more training data, there is a concerning depletion of high-quality public datasets anticipated within a few years.
+            To address this, the federated learning (FL) LLM fine-tuning paradigm has been proposed to enable collaborative LLM fine-tuning on distributed private data.
+            However, the large size of LLMs presents significant challenges to the democratization of this FL fine-tuning paradigm.
+            To mitigate this, split learning (SL) has emerged as a promising solution by offloading the primary training workload to a server through model partitioning.
+            Nonetheless, research on the SL LLM fine-tuning paradigm remains in its early stages. To fill this gap, we propose SplitLoRA, the first SL LLM fine-tuning framework.
+            Built on the split federated learning (SFL) framework, SplitLoRA combines the advantages of parallel training from FL and model splitting from SL, significantly enhancing training efficiency.
+            As the inaugural open-source benchmark for SL LLM fine-tuning, SplitLoRA provides a foundation for research efforts aimed at advancing this field.
+            Extensive simulations validate that SplitLoRA achieves target accuracy in significantly less time than state-of-the-art LLM fine-tuning frameworks.
+        </left>
+    </p>
+
+    <br>
+
+    <hr>
+    <center>
+        <h2> TLDR takeaways </h2>
+    </center>
+
+    <p>
+        <center>
+            <img src="./figures/splitllm_fram.jpeg" width="650px">
+        </center>
+    </p>
+
+    <p><b>SplitLoRA</b> consists of three fundamental components:</p>
+    <ul>
+        <li><strong>Client server</strong> has sufficient computing capability to execute the forward propagation (FP) and back-propagation (BP) of the client-side pre-trained model.</li>
+        <li><strong>Central server</strong> is a powerful computing entity responsible for performing server-side pre-trained model fine-tuning.</li>
+        <li><strong>Local aggregation server</strong> takes charge of synchronizing client-side LoRA adapters, periodically aggregating them from all participating edge servers.</li>
+    </ul>
+
+    <p>Our <b>SplitLoRA</b> framework involves the following steps:</p>
+    <ul>
+        <li>
+            Split Fine-Tuning Stage
+            <ol>
+                <li>Client-side Model Forward Propagation</li>
+                <li>Activations Transmissions</li>
+                <li>Server-side Model Forward Propagation and Back-propagation</li>
+                <li>Activations' Gradients Transmissions</li>
+                <li>Client-side Model Back-propagation</li>
+            </ol>
+        </li>
+        <li>
+            Client-side LoRA Adapter Aggregation Stage
+            <ol>
+                <li>Client-side LoRA Adapters Uploading</li>
+                <li>Client-side LoRA Adapter Aggregation</li>
+                <li>Client-side LoRA Adapter Downlink Transmissions</li>
+            </ol>
+        </li>
+    </ul>
+
+    <hr>
+    <center>
+        <h2> Key observations </h2>
+    </center>
+
+    <p>We compare <b>SplitLoRA</b> with two canonical benchmarks:</p>
+    <ul>
+        <li>
+            <b>Centralized LoRA (CenLoRA):</b> Client server collects raw data from other participating servers for full model fine-tuning with LoRA adapters.
+        </li>
+        <li>
+            <b>Federated LoRA (FedLoRA):</b> Each participating client server locally fine-tunes the full model and then transmits the updated LoRA adapters to the local aggregation server for adapter aggregation.
+        </li>
+    </ul>
+
+    <center>
+        <h3> Performance Evaluation </h3>
+    </center>
+
+    <p>
+        <b style="color: blue;">1. </b>Perplexity (PPL) performance evaluation, where a lower PPL indicates better predictive performance.
+    </p>
+    <center>
+    <table border="1"> 
+        <tr> 
+            <th>GPT2-S</th> 
+            <th>GPT2-M</th> 
+        </tr> 
+        <tr> 
+            <td><img src= 
+                "./figures/PPL_GPT2-S.jpeg" 
+                width="250"> 
+            </td> 
+            <td><img src= 
+                "./figures/PPL_GPT2-M.jpeg" 
+                width="250">
+            </td> 
+        </tr> 
+    </table>
+    </center>
+
+    <p>
+        <b style="color: blue;">2. </b>Converged accuracy for E2E NLG challenge.
+    </p>
+    <center>
+    <table border="1"> 
+        <tr> 
+            <th>GPT2-S</th> 
+            <th>GPT2-M</th> 
+        </tr> 
+        <tr> 
+            <td><img src= 
+                "./figures/Table-S.png" 
+                width="300"> 
+            </td> 
+            <td><img src= 
+                "./figures/Table-M.png" 
+                width="300">
+            </td> 
+        </tr> 
+    </table>
+    </center>
+
+    <p>
+        <b style="color: blue;">3. </b>Convergence rate.
+    </p>
+    <center>
+    <table border="1"> 
+        <tr> 
+            <th>GPT2-S</th> 
+            <th>GPT2-M</th> 
+        </tr> 
+        <tr> 
+            <td><img src= 
+                "./figures/convergence rate GTP_S.jpeg" 
+                width="250"> 
+            </td> 
+            <td><img src= 
+                "./figures/convergence rate GTP_M.jpeg" 
+                width="250">
+            </td> 
+        </tr> 
+    </table>
+    </center>
+
+    <p>
+        <b style="color: blue;">4. </b>The number of trainable parameters.
+    </p>
+    <center>
+        <table border="1"> 
+            <tr> 
+                <td><img src= 
+                    "./figures/train_para.png"
+                    width="200"> 
+                </td> 
+            </tr> 
+        </table>
+        </center>
+
+    <p>
+        <i>For more detailed experimental results, please refer to our paper.</i>
+    </p>
+
+    <center>
+        <h2> Future Direction about <b>SplitLoRA</b> </h2>
+    </center>
+
+    <ul>
+        <li>
+            <b>Model Splitting:</b> Selecting the cut layer allows control over the data volume transmitted to the central server. Moreover, the cut layer affects the division of computing workload between client devices and the central server.
+        </li>
+        <li>
+            <b>Heterogeneous Configuration:</b> In practice, the available resources among different client servers/devices vary significantly, leading to vastly different training times and causing a severe straggler problem in model aggregation. Therefore, it is essential to configure heterogeneous fine-tuning module structures for client servers/devices with varying resources.
+        </li>
+        <li>
+            <b>Efficiency:</b> The practical implementation of SplitLoRA typically necessitates leveraging private data residing on edge devices (e.g., smartphones and laptops) with lower computing and storage resources than data centers for LLM fine-tuning. Designing efficient model compression and quantization techniques to achieve a more storage, communication, and computation-efficient SL LLM fine-tuning framework is warranted.
+        </li>
+        <li>
+            <b>Privacy Preservation:</b> Due to the powerful capabilities of LLMs, fine-tuning them may inadvertently memorize and expose detailed information. Therefore, it is crucial to design efficient privacy-preserving mechanisms and strategies that ensure the training performance and effectiveness of SplitLoRA without compromising individual privacy.
+        </li>
+    </ul>
+
+
+
+
+
+
+<!-- 
+
+    <center> ImageNet100 on MLP-Mixer scales</center>
+    <p>
+        <center>
+            <img class="rounded" src="./assets/mixer_scale.png" width="700px">
+        </center>
+    </p>
+
+    <p>
+        <b style="color: blue;">Observation 5</b>: Even when trained in parallel, LoRA heads maintain orthogonality
+        throughout the training process.
+    </p>
+    <center>
+        <img class="rounded" src="./assets/alignment.png" width="500px">
+    </center>
+    </p>
+    <br>
+    <hr>
+    <center>
+        <h2> Conclusion, limitations, and implications </h2>
+    </center>
+    <p>Our results suggest LTE is a competitive parameter-efficient framework for distributed training. We highlight
+        several directions for further exploration:</p>
+    <ul>
+        <li>Improving convergence speed by integrating methods from federated learning and model averaging.</li>
+        <li>Creating adaptive mechanisms for determining the necessary number of ranks or heads.</li>
+        <li>Examining the feasibility of heterogeneous parameterization for LoRA, allowing each adapter to operate at a
+            distinct rank.</li>
+        <li>Investigating strategies for integrating multi-level optimization (optimizer at both local- and meta-level)
+        </li>
+    </ul>
+    <p>Our initial findings validate the potential of low-rank adapters in neural network training, marking a
+        significant step forward. However, further testing on larger models is essential to test the scalability of our
+        approach.
+        We believe our method opens up and contributes to many avenues:</p>
+    <ul>
+        <li><b>Collective Intelligence:</b> Distributed learning can lead to more efficient and scalable knowledge
+            acquisition.</li>
+        <li><b>Personalized Learning:</b> Each LoRA can serve as a localized learning, tailoring models to individual
+            user preferences. These preferences can be shared or used to update the base model. </li>
+        <li><b>User Safety and Privacy:</b> Localized training ensures user's data safety and privacy, as weight updates
+            are the main communication medium.</li>
+        <li><b>Computational Efficiency:</b> Pre-training models in environments with limited computational resources or
+            slow interconnect speeds.</li>
+    </ul>
+    <p>Through addressing these open questions, we hope to envision a collaborative ecosystem embodying the concept of
+        the "wisdom of the crowd." </p>
+
+    <br> -->
+
+    <hr>
+    <h3 style="margin-top: -1.6em;text-align:left"></h3>
+
+    <br><br>
+    <div
+        style="background: #FFF1E5; overflow: auto; width: auto; border: none; padding: 1em 1em 0.0em 1em; max-width: 100%; border-radius: 10px;">
+        <pre style="font-size: 10pt; margin: 0; text-align: left; white-space: pre-wrap; word-wrap: break-word;">
+    @article{xx,
+        xxxx
+        journal={arXiv preprint arXiv:2402.16828},
+        year={2024}
+    }
+    </pre>
+    </div>
+
+
+
+
+
+    <!-- <hr>
+    <center>
+        <h2> Acknowledgements </h2>
+    </center>
+    <p> JH was supported by the ONR MURI grant N00014-22-1-2740 and the MIT-IBM Watson AI Lab.
+        JB was funded by the MIT-IBM Watson AI Lab and the Packard Fellowship.
+        PI was funded by the Packard Fellowship.
+        BC was funded by the NSF STC award CCF-1231216.
+        We thank Han Guo, Lucy Chai, Wei-Chiu Ma, Eunice Lee, Dave Epstein, and Yen-Chen Lin for their feedback and
+        emotional support on the project. </p>
+    <br><br> -->
+
+    <br><br>
+    <a href="https://richzhang.github.io/colorization/">Website template edited from Colorful Colorization</a>.
+    </p>
+    <br>
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70157890-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-70157890-3');
+    </script>
+
+
+</body>
+
+</html>
