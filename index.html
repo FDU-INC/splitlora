@@ -1,488 +1,291 @@
-<html>
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script src="https://kit.fontawesome.com/2713e85d23.js" crossorigin="anonymous"></script>
-
-    <!--
-  <script src="./resources/jsapi" type="text/javascript"></script>
-  <script type="text/javascript" async>google.load("jquery", "1.3.2");</script>
- -->
-
-    <!-- @font-face {
-font-family: 'Avenir Book';
-src: url("./fonts/Avenir_Book.ttf");
-/* File to be stored at your site */
-} -->
-
-    <style type="text/css">
-        body {
-            font-family: "Avenir Book", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-            font-weight: 300;
-            font-size: 14px;
-            margin-left: auto;
-            margin-right: auto;
-            width: 800px;
-        }
-
-        h1 {
-            font-weight: 300;
-        }
-
-        h2 {
-            font-weight: 300;
-        }
-
-        p {
-            font-weight: 300;
-            line-height: 1.4;
-        }
-
-        code {
-            font-size: 0.8rem;
-            margin: 0 0.2rem;
-            padding: 0.5rem 0.8rem;
-            white-space: nowrap;
-            background: #efefef;
-            border: 1px solid #d3d3d3;
-            color: #000000;
-            border-radius: 3px;
-        }
-
-        pre>code {
-            display: block;
-            white-space: pre;
-            line-height: 1.5;
-            padding: 0;
-            margin: 0;
-        }
-
-        pre.prettyprint>code {
-            border: none;
-        }
-
-
-
-        .disclaimerbox {
-            background-color: #eee;
-            border: 1px solid #eeeeee;
-            border-radius: 10px;
-            -moz-border-radius: 10px;
-            -webkit-border-radius: 10px;
-            padding: 20px;
-        }
-
-        video.header-vid {
-            height: 140px;
-            border: 1px solid black;
-            border-radius: 10px;
-            -moz-border-radius: 10px;
-            -webkit-border-radius: 10px;
-        }
-
-        img.header-img {
-            height: 140px;
-            border: 1px solid black;
-            border-radius: 10px;
-            -moz-border-radius: 10px;
-            -webkit-border-radius: 10px;
-        }
-
-        img.rounded {
-            border: 0px solid #eeeeee;
-            border-radius: 10px;
-            -moz-border-radius: 10px;
-            -webkit-border-radius: 10px;
-
-        }
-
-        a:link,
-        a:visited {
-            color: #1367a7;
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: #208799;
-        }
-
-        td.dl-link {
-            height: 160px;
-            text-align: center;
-            font-size: 22px;
-        }
-
-        .layered-paper-big {
-            /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
-            box-shadow:
-                0px 0px 1px 1px rgba(0, 0, 0, 0.35),
-                /* The top layer shadow */
-                5px 5px 0 0px #fff,
-                /* The second layer */
-                5px 5px 1px 1px rgba(0, 0, 0, 0.35),
-                /* The second layer shadow */
-                10px 10px 0 0px #fff,
-                /* The third layer */
-                10px 10px 1px 1px rgba(0, 0, 0, 0.35),
-                /* The third layer shadow */
-                15px 15px 0 0px #fff,
-                /* The fourth layer */
-                15px 15px 1px 1px rgba(0, 0, 0, 0.35),
-                /* The fourth layer shadow */
-                20px 20px 0 0px #fff,
-                /* The fifth layer */
-                20px 20px 1px 1px rgba(0, 0, 0, 0.35),
-                /* The fifth layer shadow */
-                25px 25px 0 0px #fff,
-                /* The fifth layer */
-                25px 25px 1px 1px rgba(0, 0, 0, 0.35);
-            /* The fifth layer shadow */
-            margin-left: 10px;
-            margin-right: 45px;
-        }
-
-
-        .layered-paper {
-            /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
-            box-shadow:
-                0px 0px 1px 1px rgba(0, 0, 0, 0.35),
-                /* The top layer shadow */
-                5px 5px 0 0px #fff,
-                /* The second layer */
-                5px 5px 1px 1px rgba(0, 0, 0, 0.35),
-                /* The second layer shadow */
-                10px 10px 0 0px #fff,
-                /* The third layer */
-                10px 10px 1px 1px rgba(0, 0, 0, 0.35);
-            /* The third layer shadow */
-            margin-top: 5px;
-            margin-left: 10px;
-            margin-right: 30px;
-            margin-bottom: 5px;
-        }
-
-        .vert-cent {
-            position: relative;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        hr {
-            border: 0;
-            height: 1px;
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-        }
-
-        .container {
-            display: flex;
-            gap: 20px;
-        }
-        .container img {
-            /* border: 1px solid; */
-            height: 70px; /* 设置统一高度 */
-            object-fit: cover; /* 保持图片的宽高比 */
-            margin-right: 10px; /* 图片之间的间隔 */
-        }
-    </style>
-
-    <title>SplitLoRA</title>
-</head>
-
-<body>
-    <center>
-        
-    <center>
-        <span style="font-size:26px">SplitLoRA: A Split Parameter-Efficient Fine-Tuning<br>
-            Framework for Large Language Models</span><br><br><br>
-    </center>
-    <tbody>
-            <tr>
-                <td align="center" width="200px">
-                    <center>
-                        <br>
-                        <span style="font-size:20px">
-                            <a href=https://github.com/FDU-INC/Split_LoRA>GitHub</a>
-                        </span>
-                    </center>
-                </td>
-        </tbody>
-    <h2>
-            Abstract
-    </h2>
-    </center>
-    <p>
-        <left>
-            The scalability of large language models (LLMs) has led to significant achievements in key domains.
-            Despite the urgent need for more training data, there is a concerning depletion of high-quality public datasets anticipated within a few years.
-            To address this, the federated learning (FL) LLM fine-tuning paradigm has been proposed to enable collaborative LLM fine-tuning on distributed private data.
-            However, the large size of LLMs presents significant challenges to the democratization of this FL fine-tuning paradigm.
-            To mitigate this, split learning (SL) has emerged as a promising solution by offloading the primary training workload to a server through model partitioning.
-            Nonetheless, research on the SL LLM fine-tuning paradigm remains in its early stages. To fill this gap, we propose SplitLoRA, the first SL LLM fine-tuning framework.
-            Built on the split federated learning (SFL) framework, SplitLoRA combines the advantages of parallel training from FL and model splitting from SL, significantly enhancing training efficiency.
-            As the inaugural open-source benchmark for SL LLM fine-tuning, SplitLoRA provides a foundation for research efforts aimed at advancing this field.
-            Extensive simulations validate that SplitLoRA achieves target accuracy in significantly less time than state-of-the-art LLM fine-tuning frameworks.
-        </left>
-    </p>
-
-    <br>
-
-    <hr>
-    <center>
-        <h2> TLDR takeaways </h2>
-    </center>
-
-    <p>
-        <center>
-            <img src="./figures/splitllm_fram.jpeg" width="500px">
-        </center>
-    </p>
-
-    <p><b>SplitLoRA</b> consists of three fundamental components:</p>
-    <ul>
-        <li><strong>Client server</strong> has sufficient computing capability to execute the forward propagation (FP) and back-propagation (BP) of the client-side pre-trained model.</li>
-        <li><strong>Central server</strong> is a powerful computing entity responsible for performing server-side pre-trained model fine-tuning.</li>
-        <li><strong>Local aggregation server</strong> takes charge of synchronizing client-side LoRA adapters, periodically aggregating them from all participating edge servers.</li>
-    </ul>
-
-    <p>Our <b>SplitLoRA</b> framework involves the following steps:</p>
-    <ul>
-        <li>
-            Split Fine-Tuning Stage
-            <ol>
-                <li>Client-side Model Forward Propagation</li>
-                <li>Activations Transmissions</li>
-                <li>Server-side Model Forward Propagation and Back-propagation</li>
-                <li>Activations' Gradients Transmissions</li>
-                <li>Client-side Model Back-propagation</li>
-            </ol>
-        </li>
-        <li>
-            Client-side LoRA Adapter Aggregation Stage
-            <ol>
-                <li>Client-side LoRA Adapters Uploading</li>
-                <li>Client-side LoRA Adapter Aggregation</li>
-                <li>Client-side LoRA Adapter Downlink Transmissions</li>
-            </ol>
-        </li>
-    </ul>
-
-    <hr>
-    <center>
-        <h2> Key observations </h2>
-    </center>
-
-    <p>We compare <b>SplitLoRA</b> with two canonical benchmarks:</p>
-    <ul>
-        <li>
-            <b>Centralized LoRA (CenLoRA):</b> Client server collects raw data from other participating servers for full model fine-tuning with LoRA adapters.
-        </li>
-        <li>
-            <b>Federated LoRA (FedLoRA):</b> Each participating client server locally fine-tunes the full model and then transmits the updated LoRA adapters to the local aggregation server for adapter aggregation.
-        </li>
-    </ul>
-
-    <center>
-        <h3> Performance Evaluation </h3>
-    </center>
-
-    <p>
-        <b style="color: blue;">1. </b>Perplexity (PPL) performance evaluation, where a lower PPL indicates better predictive performance.
-    </p>
-    <center>
-    <table border="1"> 
-        <tr> 
-            <th><span style="font-size:14px">GPT2-S</span></th> 
-            <th><span style="font-size:14px">GPT2-M</span></th> 
-        </tr> 
-        <tr> 
-            <td><img src= 
-                "./figures/PPL_GPT2-S.jpeg" 
-                width="250"> 
-            </td> 
-            <td><img src= 
-                "./figures/PPL_GPT2-M.jpeg" 
-                width="250">
-            </td> 
-        </tr> 
-    </table>
-    </center>
-
-    <p>
-        <b style="color: blue;">2. </b>Converged accuracy for E2E NLG challenge.
-    </p>
-    <center>
-    <table border="1"> 
-        <tr> 
-            <th><span style="font-size:14px">GPT2-S</span></th> 
-            <th><span style="font-size:14px">GPT2-M</span></th> 
-        </tr> 
-        <tr> 
-            <td><img src= 
-                "./figures/Table-S.png" 
-                width="300"> 
-            </td> 
-            <td><img src= 
-                "./figures/Table-M.png" 
-                width="300">
-            </td> 
-        </tr> 
-    </table>
-    </center>
-
-    <p>
-        <b style="color: blue;">3. </b>Convergence rate.
-    </p>
-    <center>
-    <table border="1"> 
-        <tr> 
-            <th><span style="font-size:14px">GPT2-S</span></th> 
-            <th><span style="font-size:14px">GPT2-M</span></th> 
-        </tr> 
-        <tr> 
-            <td><img src= 
-                "./figures/convergence rate GTP_S.jpeg" 
-                width="250"> 
-            </td> 
-            <td><img src= 
-                "./figures/convergence rate GTP_M.jpeg" 
-                width="250">
-            </td> 
-        </tr> 
-    </table>
-    </center>
-
-    <p>
-        <b style="color: blue;">4. </b>The number of trainable parameters.
-    </p>
-    <center>
-        <table border="1"> 
-            <tr> 
-                <td><img src= 
-                    "./figures/train_para.png"
-                    width="300"> 
-                </td> 
-            </tr> 
-        </table>
-        </center>
-
-    <p>
-        <i>For more detailed experimental results, please refer to our paper.</i>
-    </p>
-
-    <center>
-        <h2> Future Direction about <b>SplitLoRA</b> </h2>
-    </center>
-
-    <ul>
-        <li>
-            <b>Model Splitting:</b> Selecting the cut layer allows control over the data volume transmitted to the central server. Moreover, the cut layer affects the division of computing workload between client devices and the central server.
-        </li>
-        <li>
-            <b>Heterogeneous Configuration:</b> In practice, the available resources among different client servers/devices vary significantly, leading to vastly different training times and causing a severe straggler problem in model aggregation. Therefore, it is essential to configure heterogeneous fine-tuning module structures for client servers/devices with varying resources.
-        </li>
-        <li>
-            <b>Efficiency:</b> The practical implementation of SplitLoRA typically necessitates leveraging private data residing on edge devices (e.g., smartphones and laptops) with lower computing and storage resources than data centers for LLM fine-tuning. Designing efficient model compression and quantization techniques to achieve a more storage, communication, and computation-efficient SL LLM fine-tuning framework is warranted.
-        </li>
-        <li>
-            <b>Privacy Preservation:</b> Due to the powerful capabilities of LLMs, fine-tuning them may inadvertently memorize and expose detailed information. Therefore, it is crucial to design efficient privacy-preserving mechanisms and strategies that ensure the training performance and effectiveness of SplitLoRA without compromising individual privacy.
-        </li>
-    </ul>
-
-
-
-
-
-
-<!-- 
-
-    <center> ImageNet100 on MLP-Mixer scales</center>
-    <p>
-        <center>
-            <img class="rounded" src="./assets/mixer_scale.png" width="700px">
-        </center>
-    </p>
-
-    <p>
-        <b style="color: blue;">Observation 5</b>: Even when trained in parallel, LoRA heads maintain orthogonality
-        throughout the training process.
-    </p>
-    <center>
-        <img class="rounded" src="./assets/alignment.png" width="500px">
-    </center>
-    </p>
-    <br>
-    <hr>
-    <center>
-        <h2> Conclusion, limitations, and implications </h2>
-    </center>
-    <p>Our results suggest LTE is a competitive parameter-efficient framework for distributed training. We highlight
-        several directions for further exploration:</p>
-    <ul>
-        <li>Improving convergence speed by integrating methods from federated learning and model averaging.</li>
-        <li>Creating adaptive mechanisms for determining the necessary number of ranks or heads.</li>
-        <li>Examining the feasibility of heterogeneous parameterization for LoRA, allowing each adapter to operate at a
-            distinct rank.</li>
-        <li>Investigating strategies for integrating multi-level optimization (optimizer at both local- and meta-level)
-        </li>
-    </ul>
-    <p>Our initial findings validate the potential of low-rank adapters in neural network training, marking a
-        significant step forward. However, further testing on larger models is essential to test the scalability of our
-        approach.
-        We believe our method opens up and contributes to many avenues:</p>
-    <ul>
-        <li><b>Collective Intelligence:</b> Distributed learning can lead to more efficient and scalable knowledge
-            acquisition.</li>
-        <li><b>Personalized Learning:</b> Each LoRA can serve as a localized learning, tailoring models to individual
-            user preferences. These preferences can be shared or used to update the base model. </li>
-        <li><b>User Safety and Privacy:</b> Localized training ensures user's data safety and privacy, as weight updates
-            are the main communication medium.</li>
-        <li><b>Computational Efficiency:</b> Pre-training models in environments with limited computational resources or
-            slow interconnect speeds.</li>
-    </ul>
-    <p>Through addressing these open questions, we hope to envision a collaborative ecosystem embodying the concept of
-        the "wisdom of the crowd." </p>
-
-    <br> -->
-
-    <hr>
-    <h3 style="margin-top: -1.6em;text-align:left"></h3>
-
-    <br><br>
- 
-
-
-
-
-
-    <!-- <hr>
-    <center>
-        <h2> Acknowledgements </h2>
-    </center>
-    <p> JH was supported by the ONR MURI grant N00014-22-1-2740 and the MIT-IBM Watson AI Lab.
-        JB was funded by the MIT-IBM Watson AI Lab and the Packard Fellowship.
-        PI was funded by the Packard Fellowship.
-        BC was funded by the NSF STC award CCF-1231216.
-        We thank Han Guo, Lucy Chai, Wei-Chiu Ma, Eunice Lee, Dave Epstein, and Yen-Chen Lin for their feedback and
-        emotional support on the project. </p>
-    <br><br> -->
-
-    <br><br>
-    <a href="https://richzhang.github.io/colorization/">Website template edited from Colorful Colorization</a>.
-    </p>
-    <br>
-
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70157890-3"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-70157890-3');
-    </script>
-
-
-</body>
-
-</html>
+
+# SplitLoRA: A Split Parameter-Efficient Fine-Tuning Framework for Large Language Models
+
+Zheng Lin<sup>1 2</sup> &nbsp;    Xuanjie Hu<sup>1</sup> &nbsp; Yuxin Zhang<sup>1</sup> &nbsp; Zhe Chen<sup>1</sup> &nbsp; Zihan Fang<sup>1 3</sup> &nbsp;  Xianhao Chen<sup>2</sup> &nbsp;  Wenjun Zhu<sup>1</sup> &nbsp; Jin Zhao<sup>1</sup> &nbsp; Ang Li<sup>4</sup> &nbsp; Praneeth Vepakomma<sup>5 6</sup> &nbsp; Yue Gao<sup>1</sup>
+
+<sup>1</sup>School of Computer Science, Fudan University, Shanghai, China <br>
+<sup>2</sup>Department of Electrical and Electronic Engineering, University of Hong Kong, Pok Fu Lam, Hong Kong, China<br>
+<sup>3</sup>Department of Computer Science, City University of Hong Kong, Kowloon, Hong Kong, China<br>
+<sup>4</sup>Department of Electrical and Computer Engineering, University of Maryland, College Park, USA<br>
+<sup>5</sup>Massachusetts Institute of Technology, Cambridge, USA<br>
+<sup>6</sup>Mohamed bin Zayed University of Artificial Intelligence, Abu Dhabi, United Arab Emirates
+
+**Overview: SplitLoRA is the first SL LLM fine-tuning framework. SplitLoRA is built on the split federated learning (SFL) framework, amalgamating the advantages of parallel training from FL and model splitting from
+SL, thus greatly enhancing the training efficiency. It is worth noting that SplitLoRA is the inaugural open-source benchmark for SL LLM fine-tuning, providing a foundation for research efforts dedicated to advancing SL LLM fine-tuning.  The project page is available at [https://fdu-inc.github.io/splitlora/](https://fdu-inc.github.io/splitlora/) and the technical report can be found at [https://arxiv.org/pdf/2407.00952](https://arxiv.org/pdf/2407.00952). If you've found the SplitLoRA framework useful for your project, please cite our paper.**
+
+### Citation
+```BibTeX
+@inproceedings{
+  @article{lin2024splitlora,
+  title={{SplitLoRA: A Split Parameter-Efficient Fine-Tuning Framework for Large Language Models}},
+  author={Lin, Zheng and Hu, Xuanjie and Zhang, Yuxin and Chen, Zhe and Fang, Zihan and Chen, Xianhao and Li, Ang and Vepakomma, Praneeth and Gao, Yue},
+  journal={arXiv preprint arXiv:2407.00952},
+  year={2024}
+  }
+}
+```
+
+
+
+## User Guide
+
+**This repository is based on [LoRA](https://github.com/microsoft/LoRA).**
+
+### 1 Introduction
+
+SplitLoRA contains the source code of the Python package loralib and  a example of how to integrate it with PyTorch models, GPT2-s. We only support PyTorch for now. In the future, we will integrate more open source LLMs and more tasks into the SplitLoRA framework
+
++ The source code of the Python package loralib
+
++ LoRA fine-tuning implementation of large language models 
+
++ LoRA fine-tuning implementation of large language model under `SplitLoRA framework`   
+
+### 2 Build
+
+#### 2.1 Environment Requirements
+
+We have verified in the environment below:
+
++ OS: Ubuntu 18.04 
+
++ Python: 3.7.16
+
+|    |torch <br> 1.7.1+cu110  |  transformers<br>3.3.1 | spacy | tqdm | tensorboard|progress|
+|---|:---:|:---:|---|---|---|---|
+
+<i>Note: You still need the original pre-trained checkpoint from [Hugging Face](https://huggingface.co/) to use the LoRA checkpoints.</i>
+
+#### 2.2 Quick Start
+1. Installing `loralib` is simply
+
+ ```python
+ pip install loralib
+ # Alternatively
+ # pip install git+https://github.com/microsoft/LoRA
+ ```
+
+ 2. You can choose to adapt some layers by replacing them with counterparts implemented in `loralib`. We only support `nn.Linear`, `nn.Embedding`, and `nn.Conv2d` for now. We also support a `MergedLinear` for cases where a single `nn.Linear` represents more than one layers, such as in some implementations of the attention `qkv` projection (see Additional Notes for more).
+
+ ```python
+ # ===== Before =====
+ # layer = nn.Linear(in_features, out_features)
+
+ # ===== After ======
+ import loralib as lora
+ # Add a pair of low-rank adaptation matrices with rank r=16
+ layer = lora.Linear(in_features, out_features, r=16)
+ ```
+
+ 3. Before the training loop begins, mark only LoRA parameters as trainable.
+
+ ```python
+ import loralib as lora
+ model = BigModel()
+ # This sets requires_grad to False for all parameters without the string "lora_" in their names
+ lora.mark_only_lora_as_trainable(model)
+ # Training loop
+ for batch in dataloader:
+    ...
+ ```
+ 4. When saving a checkpoint, generate a `state_dict` that only contains LoRA parameters.
+
+ ```python
+ # ===== Before =====
+ # torch.save(model.state_dict(), checkpoint_path)
+ # ===== After =====
+ torch.save(lora.lora_state_dict(model), checkpoint_path)
+ ```
+ 5. When loading a checkpoint using `load_state_dict`, be sure to set `strict=False`.
+
+ ```python
+ # Load the pretrained checkpoint first
+ model.load_state_dict(torch.load('ckpt_pretrained.pt'), strict=False)
+ # Then load the LoRA checkpoint
+ model.load_state_dict(torch.load('ckpt_lora.pt'), strict=False)
+ ```
+
+#### 2.3 Steps To Reproduce Our Results
+
+1. You can start with the following docker image: `nvcr.io/nvidia/pytorch:20.03-py3` on a GPU-capable machine, but any generic PyTorch image should work.
+
+ ```python
+ docker run -it nvcr.io/nvidia/pytorch:20.03-py3
+ ```
+
+ 2. Clone the repo and install dependencies in a virtual environment (remove sudo if running in docker container):
+
+ ```python
+ pip install -r requirement.txt
+ bash download_pretrained_checkpoints.sh
+ bash create_datasets.sh
+ cd ./eval
+ bash download_evalscript.sh
+ cd ..
+ ```
+##### Now we are ready to replicate the results 
+
+### 3 SplitLoRA Module Libraries
+
+#### 3.1 Repository 
+Our implementation is based on the fine-tuning code for GPT-2 in [Hugging Face](https://huggingface.co/).
+There are several directories in this repo:
+
+* [src/](src) contains the source code used for data processing, training, and decoding.
+* [eval/](eval) contains the code for task-specific evaluation scripts.
+* [data/](data) contains the raw data we used in our experiments.
+* [vocab/](vocab) contains the GPT-2 vocabulary files.
+
+#### 3.2 Hyper-Parameter  
+
+
+```python
+ --nproc_per_node=1: Specifies the number of processes per node, set to 1 here.
+
+--train_data: Specifies the path to the training data, set to ./data/e2e/train0.jsonl,train1.jsonl,train2.jsonl.
+
+--valid_data: Specifies the path to the validation data, set to ./data/e2e/valid.jsonl.
+
+--train_batch_size: Specifies the training batch size, set to 8.
+
+--grad_acc: Specifies the number of gradient accumulation steps, set to 1, which means the gradient is updated once per batch.
+
+--valid_batch_size: Specifies the validation batch size, set to 4.
+
+--seq_len: Specifies the sequence length, set to 512.
+
+--model_card: Specifies the path to the model configuration file, set to gpt2.md.
+
+--init_checkpoint: Specifies the path to the initial checkpoint file for model initialization, set to ./pretrained_checkpoints/gpt2-pytorch_model.bin.
+
+--platform: Specifies the execution platform, set to local.
+
+--clip: Specifies the threshold for gradient clipping, set to 0.0, which means no gradient clipping is performed.
+
+--lr: Specifies the learning rate, set to 0.0002.
+
+--weight_decay: Specifies the weight decay (L2 regularization) parameter, set to 0.01.
+
+--correct_bias: Specifies whether to correct biases, default is False.
+
+--adam_beta2: Specifies the beta2 parameter for the Adam optimizer, set to 0.999.
+
+--scheduler: Specifies the type of learning rate scheduler, set to linear.
+
+--warmup_step: Specifies the number of warm-up steps for linear learning rate warm-up, set to 500.
+
+--max_epoch: Specifies the maximum number of training epochs, set to 5.
+
+--save_interval: Specifies the interval steps for model saving, set to 1000.
+
+--lora_dim: Specifies the dimension of LoRA (Local-Regional Attention), set to 4.
+
+--lora_alpha: Specifies the alpha hyperparameter for LoRA, set to 32.
+
+--lora_dropout: Specifies the dropout rate for LoRA, set to 0.1.
+
+--label_smooth: Specifies the label smoothing parameter, set to 0.1.
+
+--work_dir: Specifies the working directory where the models and log files are saved, set to ./trained_models/GPT2_S/e2e.
+
+--random_seed: Specifies the random seed, set to 110.
+```
+
+
+### 4  Training Process
+
+1. Train GPT-2 Medium with SplitLoRA  
+
+At examples/NLG, run:
+
+```python
+python -m torch.distributed.launch --nproc_per_node=1 --use_env src/gpt2_ft_sfl.py \
+--train_data0 ./data/e2e/train0.jsonl \
+--train_data1 ./data/e2e/train1.jsonl \
+--train_data2 ./data/e2e/train2.jsonl \
+--valid_data ./data/e2e/valid.jsonl \
+--train_batch_size 4 \
+--grad_acc 1 \
+--valid_batch_size 4 \
+--seq_len 512 \
+--model_card gpt2.md \
+--init_checkpoint ./pretrained_checkpoints/gpt2-medium-pytorch_model.bin \
+--platform local \
+--clip 0.0 \
+--lr 0.0002 \
+--weight_decay 0.01 \
+--correct_bias \
+--adam_beta2 0.999 \
+--scheduler linear \
+--warmup_step 500 \
+--max_epoch 5 \
+--save_interval 400000 \
+--lora_dim 2 \
+--lora_alpha 32 \
+--lora_dropout 0.1 \
+--label_smooth 0.1 \
+--work_dir ./trained_models/GPT2_M/e2e \
+--random_seed 40
+```
+
+2. Generate outputs from the trained model using beam search:  
+
+```python
+python -m torch.distributed.launch --nproc_per_node=1 src/gpt2_beam.py \
+    --data ./data/e2e/test.jsonl \
+    --batch_size 1 \
+    --seq_len 512 \
+    --eval_len 64 \
+    --model_card gpt2.md \
+    --init_checkpoint ./trained_models/GPT2_S/e2e/{model.name.pt} \
+    --platform local \
+    --lora_dim 4 \
+    --lora_alpha 32 \
+    --beam 10 \
+    --length_penalty 0.8 \
+    --no_repeat_ngram_size 4 \
+    --repetition_penalty 1.0 \
+    --eos_token_id 628 \
+    --work_dir ./trained_models/GPT2_S/e2e \
+    --output_file predict.26289.b10p08r4.jsonl
+```
+
+3. Decode outputs from step (2)  
+
+```python
+python src/gpt2_decode.py \
+    --vocab ./vocab \
+    --sample_file ./trained_models/GPT2_M/e2e/predict.26289.b10p08r4.jsonl \
+    --input_file ./data/e2e/test_formatted.jsonl \
+    --output_ref_file e2e_ref.txt \
+    --output_pred_file e2e_pred.txt
+```
+
+4. Run evaluation on E2E test set
+
+```python
+python eval/e2e/measure_scores.py e2e_ref.txt e2e_pred.txt -p
+```
+
+### 5. Citation
+```BibTeX
+@inproceedings{
+  @article{lin2024splitlora,
+  title={{SplitLoRA: A Split Parameter-Efficient Fine-Tuning Framework for Large Language Models}},
+  author={Lin, Zheng and Hu, Xuanjie and Zhang, Yuxin and Chen, Zhe and Fang, Zihan and Chen, Xianhao and Li, Ang and Vepakomma, Praneeth and Gao, Yue},
+  journal={arXiv preprint arXiv:2407.00952},
+  year={2024}
+  }
+}
+```
+
+## Appendix 
+If you want to know more detailed information about Lora, see https://github.com/microsoft/LoRA.
+
+If you've found SplitLoRA framework useful for your project, please cite our paper.
+
+## Update
+[2025/01/09] 🔥 We are excited to announce the release of the split_lora v1.1.0 version for Llama3 . This code allows you to efficiently train the Llama3 model by leveraging split learning techniques. You can access and review the code at the following link: [[Code](https://github.com/FDU-INC/Split_LoRA/tree/v1.1.0)]
+
+## Contact Us
++ Mr. Xuanjie Hu, email: 23210240184@m.fudan.edu.cn
